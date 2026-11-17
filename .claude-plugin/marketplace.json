@@ -1,0 +1,6 @@
+{
+  "name": "claude-chat-figure",
+  "owner": { "name": "another1124" },
+  "description": "讓 Claude 在聊天視窗畫 SVG 圖的外掛",
+  "plugins": [{ "name": "chat-figure", "source": "./" }]
+}

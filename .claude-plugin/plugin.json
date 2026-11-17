@@ -1,0 +1,6 @@
+{
+  "name": "chat-figure",
+  "version": "0.1.0",
+  "description": "讓 Claude 在聊天視窗畫 SVG 圖：圖畫在畫圖工具那一行底下",
+  "author": { "name": "another1124" }
+}
