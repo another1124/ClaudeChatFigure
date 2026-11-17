@@ -47,7 +47,7 @@ tsconfig.json            型別檢查設定（引擎產生）
 | `FigureInput` | 型別 | `title`、`svg`、`alt`（都是字串） |
 | `readFigure(value)` | 函數 | 輸入 → `FigureInput` 或 `null` |
 | `problemOf(figure)` | 函數 | `FigureInput` → 錯誤原因或 `null` |
-| `session.start` | 掛勾 | `$.tool.register`（`isDeferred: false`） |
+| `session.start` | 掛勾 | `e.surface === 'terminal'` → 不登記；其他（含 `null`）→ `$.tool.register`（`isDeferred: false`） |
 | `tool.call`（`tool: FULL_NAME`） | 掛勾 | 不合格 → `{ deny }`；合格 → `{ result }` 一句話；出錯 → `.catch` 回 `{ deny }` |
 | `ui.render`（`component: 'ToolUse'`） | 掛勾 | 本工具、已完成、沒出錯、不是終端機 → `<Box>` 原本那一行 + `<Svg>`；其他 → `next(e)` |
 
@@ -55,6 +55,8 @@ tsconfig.json            型別檢查設定（引擎產生）
 
 | 測試 | 檢查 |
 |---|---|
+| 開場登記 | `vscode`、`desktop`、`mobile`、`null` 各登記一次，共 4 次 |
+| 終端機開場 | `terminal` 登記 0 次 |
 | 合法的輸入 | `$.tool.call` 回 `result`，內容含標題 |
 | 不是 SVG 的輸入 | `$.tool.call` 回 `deny`，原因含 `<svg` |
 | 有 Svg 元件的介面 | `vscode`、`desktop`、`mobile` 都找得到 `Svg` |

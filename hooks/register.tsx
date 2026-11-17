@@ -62,7 +62,14 @@ function problemOf(figure: FigureInput | null): string | null {
 export const register: Register = on => {
   // 開場登記工具。isDeferred: false 讓工具的說明一開始就在 Claude 的工具清單裡，
   // 不必先用 ToolSearch 載入，Claude 才會知道自己能畫圖。
+  // 終端機開的對話不登記：終端機畫不出 SVG，登記了 Claude 會以為能畫，畫了使用者卻看不到。
+  // 只排除 'terminal'。surface 為 null 的照樣登記：VS Code 擴充套件的對話開場時就是 null
+  // （2026-11-17 在 2.1.325 實測），排除 null 會讓 VS Code 也沒有畫圖工具。
+  // 代價是指令列模式（-p）與 SDK 的對話也是 null，工具在但沒有畫面可畫。
   on('session.start', async ($, e, next) => {
+    if (e.surface === 'terminal') {
+      return next(e)
+    }
     await $.tool.register({
       name: TOOL,
       description:

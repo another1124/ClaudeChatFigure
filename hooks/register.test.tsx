@@ -32,6 +32,32 @@ function toolRow(surface: 'terminal' | 'desktop' | 'vscode' | 'mobile', tool: st
   } as const
 }
 
+test('開場：VS Code、桌面版、手機版、沒有介面的對話都登記畫圖工具', async ($, on) => {
+  let registered = 0
+  on('tool.register', () => {
+    registered += 1
+    return { value: { tool: FULL_NAME } }
+  })
+  on('session.start', (_, e) => ({ cwd: e.cwd }))
+
+  for (const surface of ['vscode', 'desktop', 'mobile', null] as const) {
+    await $.session.start({ cwd: '/', surface, isInteractive: surface !== null })
+  }
+  expect(registered).toBe(4)
+})
+
+test('開場：終端機的對話不登記畫圖工具', async ($, on) => {
+  let registered = 0
+  on('tool.register', () => {
+    registered += 1
+    return { value: { tool: FULL_NAME } }
+  })
+  on('session.start', (_, e) => ({ cwd: e.cwd }))
+
+  await $.session.start({ cwd: '/', surface: 'terminal', isInteractive: true })
+  expect(registered).toBe(0)
+})
+
 test('合法的輸入：工具回一句話給 Claude', async ($, on) => {
   on('tool.register', () => ({ value: { tool: FULL_NAME } }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
