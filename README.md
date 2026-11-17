@@ -20,8 +20,7 @@ Claude 需要用圖說明時，把圖寫成 SVG（用文字描述一張圖的格
 
 ## 安裝
 
-這是私人 Repo：要有 `another1124/ClaudeChatFigure` 的讀取權限，
-電腦上也要已經登入過 GitHub（安裝過程不會問帳號密碼）。
+這是公開 Repo，不需要 GitHub 帳號就能安裝。
 
 在終端機開的 Claude Code 輸入框打：
 
