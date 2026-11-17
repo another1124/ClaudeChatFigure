@@ -20,24 +20,32 @@ Claude 需要用圖說明時，把圖寫成 SVG（用文字描述一張圖的格
 
 ## 安裝
 
-這是公開 Repo，不需要 GitHub 帳號就能安裝。
+公開 Repo，不需要 GitHub 帳號。
 
-在終端機開的 Claude Code 輸入框打：
-
-```
-/plugin install chat-figure --marketplace another1124/ClaudeChatFigure
-```
-
-或在命令列打：
+在命令列（PowerShell、VS Code 的終端機都可以）打：
 
 ```
 claude plugin install chat-figure --marketplace another1124/ClaudeChatFigure
 ```
 
-問要不要加入 marketplace 時按 `y`，範圍選使用者層級（user）。之後這台電腦開的每個新對話都有畫圖工具。
+也可以在終端機開的 Claude Code 輸入框打 `/plugin install chat-figure --marketplace another1124/ClaudeChatFigure`，
+問要不要加入 marketplace 時按 `y`，範圍選使用者層級（user）。
 
-更新：`claude plugin update chat-figure`（更新後要重開 Claude Code 才生效）。
-移除：`claude plugin uninstall chat-figure`。
+### 裝好之後
+
+- 確認有裝好：打 `claude plugin list`，清單裡有 `chat-figure@claude-chat-figure`，狀態是 `enabled`。
+- 預設裝在使用者層級：這台電腦之後新開的 Claude Code 對話都有畫圖工具。
+- 已經開著的對話不會自動有，要重開。
+- 只想在某個專案用：在那個專案的資料夾裡安裝，並加上範圍：
+  - `--scope project`：記在專案的共用設定，跟著專案的 git 走。
+  - `--scope local`：記在專案的個人設定，只有你有。
+
+### 更新與移除
+
+| 要做的事 | 指令 |
+|---|---|
+| 更新 | `claude plugin update chat-figure`，更新後要重開 Claude Code 才生效 |
+| 移除 | `claude plugin uninstall chat-figure` |
 
 ## Claude 怎麼用它
 

@@ -98,6 +98,30 @@
 - 不帶任何帳號也讀得到這個 Repo（公開後實測）。
 - `claude plugin test`：6 項全部通過。
 
+- 強制推上去之後，舊提交用編號在 GitHub 上還打得開，所以由使用者刪掉 Repo、重建同名的空公開 Repo，再推上改寫後的歷史。
+  - 重建後用完整編號查舊提交：API 回「No commit found」，網頁回 404。
+  - 不帶帳號重新抓一份，搜過全部歷史，都沒有上述三處的字串。
+
 ### 已知限制
-- 舊提交的編號在 GitHub 上可能還能直接打開一陣子。
-- 公開期間已經有人複製走的副本，不受這次改寫影響。
+- 公開期間如果已經有人複製走，那些副本不受這次改寫影響。（重建前查過：沒有 fork，也沒有人加星。）
+
+---
+
+## 修改：README 安裝說明（同日）
+
+### 執行的動作
+- 安裝段改寫：
+  - 命令列安裝放在最前面。
+  - 補上「裝好之後」：怎麼確認、誰會有、已開著的對話要重開、只裝在單一專案的兩種範圍。
+  - 更新與移除改成表格。
+
+### 驗證
+- 在臨時的設定資料夾（不動到既有安裝）依序跑 README 的三個指令：
+  - `claude plugin install chat-figure --marketplace another1124/ClaudeChatFigure`：成功。沒有設定 SSH 的電腦會改用 HTTPS 下載。
+  - `claude plugin update chat-figure`：回「已是最新版 0.1.0」。
+  - `claude plugin uninstall chat-figure`：成功，之後清單裡沒有它。
+- 原本已安裝的那份沒有受影響，仍是 enabled。
+
+### 未驗證
+- 在 Claude Code 輸入框打 `/plugin install` 的流程：本機只測了命令列。
+- `--scope project`、`--scope local` 兩種範圍。
